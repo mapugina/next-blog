@@ -34,7 +34,7 @@ Install with npm:
 
     $ npm i -D prettier
 
-Prettier also needs a .prettierrc file and allows you to use several formats for that. I am partial to yaml so into a freshly touched .prettierrc.yaml go my preferred prettier options
+Prettier also needs a .prettierrc file and allows you to use several formats for that. I am partial to YAML so into a freshly touched .prettierrc.yaml go my preferred prettier options
 
     # .prettierrc.yaml
     singleQuote: true
