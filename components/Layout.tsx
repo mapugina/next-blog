@@ -1,5 +1,5 @@
-import Head from 'next/head'
-import Header from './Header'
+import Head from 'next/head';
+import Header from './Header';
 
 export default function Layout({ children, pageTitle, ...props }) {
   return (
@@ -14,5 +14,5 @@ export default function Layout({ children, pageTitle, ...props }) {
       </section>
       <footer>Here there be a footer!</footer>
     </>
-  )
+  );
 }
