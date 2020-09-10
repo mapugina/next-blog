@@ -18,17 +18,19 @@ I probably could have found a next starter that had one of these already, but I 
 
 Prettier works with .editorconfig so before I get going better generate one of those:
 
-    # .editorconfig
-    root = true
+```ini
+# .editorconfig
+root = true
 
-    [*]
-    indent_style = space
-    indent_size = 2
-    charset = utf-8
-    insert_final_newline = true
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+insert_final_newline = true
 
-    [*.md]
-    indent_size = 4
+[*.md]
+indent_size = 4
+```
 
 Install with npm:
 
@@ -36,56 +38,68 @@ Install with npm:
 
 Prettier also needs a .prettierrc file and allows you to use several formats for that. I am partial to YAML so into a freshly touched .prettierrc.yaml go my preferred prettier options
 
-    # .prettierrc.yaml
-    singleQuote: true
-    trailingComma: none
-    arrowParens: avoid
+```yaml
+# .prettierrc.yaml
+singleQuote: true
+trailingComma: none
+arrowParens: avoid
+```
 
 Take my preferences here for what they are, preferences. If you don't like them that is okay!
 
 Finally, we are going to have folders we don't want prettier to look at better put those in the .prettierignore file.
 
-    # .prettierignore
+```gitignore
+# .prettierignore
 
-    # project files
-    .next
+# project files
+.next
 
-    # dependencies
-    /node_modules
+# dependencies
+/node_modules
 
-    # testing
-    /coverage
+# testing
+/coverage
 
-    # production
-    /build
+# production
+/build
+```
 
 Looks like we are ready to try it.
 
-    $ npx prettier --write .
-    .prettierrc.yaml 28ms
-    components/Header.tsx 248ms
-    components/Layout.tsx 13ms
-    components/PostList.tsx 20ms
-    next-env.d.ts 5ms
-    next.config.js 45ms
-    package-lock.json 333ms
-    package.json 54ms
-    pages/_app.tsx 8ms
-    pages/about.tsx 20ms
-    pages/index.tsx 32ms
-    pages/post/[postname].tsx 38ms
-    posts/adding-prettier-to-a-project.md 87ms
-    posts/hello-blog.md 80ms
-    README.md 16ms
-    siteconfig.json 3ms
-    styles/globals.css 22ms
-    tsconfig.json 7ms
+```shell
+$ npx prettier --write .
+.prettierrc.yaml 28ms
+components/Header.tsx 248ms
+components/Layout.tsx 13ms
+components/PostList.tsx 20ms
+next-env.d.ts 5ms
+next.config.js 45ms
+package-lock.json 333ms
+package.json 54ms
+pages/_app.tsx 8ms
+pages/about.tsx 20ms
+pages/index.tsx 32ms
+pages/post/[postname].tsx 38ms
+posts/adding-prettier-to-a-project.md 87ms
+posts/hello-blog.md 80ms
+README.md 16ms
+siteconfig.json 3ms
+styles/globals.css 22ms
+tsconfig.json 7ms
+```
 
 Nice. I'll sleep better at night knowing my empty `styles/globals.css` is formatted correctly.
 
 Finally, I am going to want to be lazy about running this so I add the following line to my scripts in my `package.json`
 
-    "format": "prettier --write ."
+```json
+{
+    "scripts": {
+        "format": "prettier --write ."
+    }
+}
+```
 
 # Adding Git hooks
 
@@ -95,34 +109,39 @@ The instructions on prettier.io suggest using lint-staged and husky. For those w
 
 So let's install everything we'll need for this:
 
-    $ npm i -D husky lint-staged prettier
+```shell
+$ npm i -D husky lint-staged prettier
+```
 
 then add the recommended properties to the `package.json`:
 
-    {
-        ...
-        "husky": {
-            "hooks": {
-                "pre-commit": "lint-staged"
-            }
-        },
-        "lint-staged": {
-            "**/*": "prettier --write --ignore-unknown"
+```json
+{
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
         }
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
     }
+}
+```
 
 When I pasted this into my `package.json` it formatted a bit oddly. What if I commit the change and see if it works?
 
-    $ git add package*.json
-    $ git commit -m "Adds linting hooks"
-    husky > pre-commit (node v10.22.0)
-    ✔ Preparing...
-    ✔ Running tasks...
-    ✔ Applying modifications...
-    ✔ Cleaning up...
-    [main 88596a4] Adds linting hooks
-    Date: Sat Sep 5 00:43:48 2020 -0600
-    2 files changed, 927 insertions(+), 3 deletions(-)
+```shell
+$ git add package*.json
+$ git commit -m "Adds linting hooks"
+husky > pre-commit (node v10.22.0)
+✔ Preparing...
+✔ Running tasks...
+✔ Applying modifications...
+✔ Cleaning up...
+[main 88596a4] Adds linting hooks
+Date: Sat Sep 5 00:43:48 2020 -0600
+2 files changed, 927 insertions(+), 3 deletions(-)
+```
 
 Almost effortless! It is worth noting here that I just went with the most basic of setups. There are multiple ways to skin this cat documented in prettier's [pre-commit](https://prettier.io/docs/en/precommit.html) section.
 
