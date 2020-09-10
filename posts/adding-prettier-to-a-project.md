@@ -2,10 +2,10 @@
 title: 'Adding prettier to a project'
 createDate: '2020-09-05T05:03:01.824Z'
 tags:
-    - prettier
-    - tooling
-    - node
-    - husky
+  - prettier
+  - tooling
+  - node
+  - husky
 ---
 
 Boy, this blog is pretty plain isn't it? No CSS, plain text, it looks like the 90s. If I could throw in a hotly debated marquee tag I'd be set. Time to make some things nicer around here. What should I do first?
@@ -95,9 +95,9 @@ Finally, I am going to want to be lazy about running this so I add the following
 
 ```json
 {
-    "scripts": {
-        "format": "prettier --write ."
-    }
+  "scripts": {
+    "format": "prettier --write ."
+  }
 }
 ```
 
@@ -117,14 +117,14 @@ then add the recommended properties to the `package.json`:
 
 ```json
 {
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "**/*": "prettier --write --ignore-unknown"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
 }
 ```
 
@@ -153,6 +153,6 @@ Doing this myself has led to some pretty cool stuff. I had mixed feelings about 
 
 Maybe the orginal sources say it better than I do:
 
--   [Prettier](https://prettier.io/)
--   [lint-staged](https://github.com/okonet/lint-staged)
--   [husky](https://github.com/typicode/husky)
+- [Prettier](https://prettier.io/)
+- [lint-staged](https://github.com/okonet/lint-staged)
+- [husky](https://github.com/typicode/husky)
