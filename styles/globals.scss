@@ -1,1 +1,82 @@
 @import '../node_modules/normalize.css/normalize.css';
+
+/* Color Theme Swatches in Hex */
+$rockety: (
+  bg: #141c26,
+  bg-pop: #1e3040,
+  text-color: #d4d4d4,
+  footer: (
+    bg: #bf9926,
+    text: #fff
+  ),
+  header: (
+    bg: #d95555,
+    text: #fff
+  ),
+  heading: #a7cbd9,
+  link: #a7cbd9,
+  emphasis: #bf9926,
+  danger: #d95555
+);
+
+$vscode: (
+  bg: #1e1e1e,
+  bg-pop: #595959,
+  text-color: #d4d4d4,
+  footer: (
+    bg: #007ad3,
+    text: #fff
+  ),
+  header: (
+    bg: #007ad3,
+    text: #fff
+  ),
+  heading: #569cd6,
+  link: #9cdcfe,
+  emphasis: #bf9926,
+  danger: #d95555
+);
+
+@mixin siteTheme($theme-name, $theme-map) {
+  .#{$theme-name} {
+    background-color: map-get($map: $theme-map, $key: bg);
+    color: map-get($map: $theme-map, $key: text-color);
+    font-family: 'Open Sans', sans-serif;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .heading {
+      font-family: 'Railway', sans-serif;
+      color: map-get($map: $theme-map, $key: heading);
+    }
+
+    a {
+      color: map-get($theme-map, link);
+    }
+
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+
+    .emphasis {
+      color: #bf9926;
+    }
+
+    .danger {
+      color: map-get($map: $theme-map, $key: danger);
+    }
+  }
+}
+
+main {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@include siteTheme('rocket', $rockety);
+@include siteTheme('vscode', $vscode);
